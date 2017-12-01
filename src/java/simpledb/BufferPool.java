@@ -6,7 +6,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * BufferPool manages the reading and writing of pages into memory from
- * disk. Access methods call into it to retrieve pages, and it fetches
+ * disk.
+ * Access methods call into it to retrieve pages, and it fetches
  * pages from the appropriate location.
  * <p>
  * The BufferPool is also responsible for locking;  when a transaction fetches
@@ -25,6 +26,8 @@ public class BufferPool {
     other classes. BufferPool should use the numPages argument to the
     constructor instead. */
     public static final int DEFAULT_PAGES = 50;
+    private final int numPage;
+    private final Page[] buffer;
 
     /**
      * Creates a BufferPool that caches up to numPages pages.
@@ -32,7 +35,8 @@ public class BufferPool {
      * @param numPages maximum number of pages in this buffer pool.
      */
     public BufferPool(int numPages) {
-        // some code goes here
+    	this.numPage = numPages;
+    	this.buffer = new Page[numPages];
     }
     
     public static int getPageSize() {
@@ -66,7 +70,11 @@ public class BufferPool {
      */
     public  Page getPage(TransactionId tid, PageId pid, Permissions perm)
         throws TransactionAbortedException, DbException {
-        // some code goes here
+        for (Page page : this.buffer) {
+            if(page.getId().equals(pid)){
+                return page;
+            }
+        }
         return null;
     }
 
