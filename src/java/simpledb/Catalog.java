@@ -1,11 +1,15 @@
 package simpledb;
 
+import com.sun.tools.javac.util.Pair;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * The Catalog keeps track of all available tables in the database and their
@@ -17,13 +21,17 @@ import java.util.concurrent.ConcurrentHashMap;
  * @Threadsafe
  */
 public class Catalog {
-
+	final List<DbFile> files;
+	final List<String> names;
+	final List<String> pkeyFields;
     /**
      * Constructor.
      * Creates a new, empty catalog.
      */
     public Catalog() {
-        // some code goes here
+        files = new ArrayList<>();
+        names = new ArrayList<>();
+        pkeyFields = new ArrayList<>();
     }
 
     /**
@@ -36,7 +44,23 @@ public class Catalog {
      * @param pkeyField the name of the primary key field
      */
     public void addTable(DbFile file, String name, String pkeyField) {
-        // some code goes here
+        final int i = names.indexOf(name);
+        if(i == -1){
+            for (int j = 0; j < files.size(); j++) {
+                if(files.get(j).getId() == file.getId()){
+                	names.set(j, name);
+                	files.set(j, file);
+                	pkeyFields.set(j, pkeyField);
+                	return;
+                }
+            }
+            files.add(file);
+            names.add(name);
+            pkeyFields.add(pkeyField);
+        }else{
+        	files.set(i, file);
+        	pkeyFields.set(i, pkeyField);
+        }
     }
 
     public void addTable(DbFile file, String name) {
@@ -59,8 +83,12 @@ public class Catalog {
      * @throws NoSuchElementException if the table doesn't exist
      */
     public int getTableId(String name) throws NoSuchElementException {
-        // some code goes here
-        return 0;
+        final int i = names.indexOf(name);
+        if(i == -1){
+            throw new NoSuchElementException();
+        }else{
+            return files.get(i).getId();
+        }
     }
 
     /**
@@ -70,8 +98,12 @@ public class Catalog {
      * @throws NoSuchElementException if the table doesn't exist
      */
     public TupleDesc getTupleDesc(int tableid) throws NoSuchElementException {
-        // some code goes here
-        return null;
+        final Stream<DbFile> pairStream = files.stream().filter(it -> it.getId() == tableid);
+        final Optional<DbFile> first = pairStream.findFirst();
+        if(first.isPresent()){
+            return first.get().getTupleDesc();
+        }
+        throw new NoSuchElementException();
     }
 
     /**
@@ -81,28 +113,42 @@ public class Catalog {
      *     function passed to addTable
      */
     public DbFile getDatabaseFile(int tableid) throws NoSuchElementException {
-        // some code goes here
-        return null;
+        final Stream<DbFile> pairStream = files.stream().filter(it -> it.getId() == tableid);
+        final Optional<DbFile> first = pairStream.findFirst();
+        if(first.isPresent()){
+            return first.get();
+        }
+        throw new NoSuchElementException();
     }
 
     public String getPrimaryKey(int tableid) {
-        // some code goes here
-        return null;
+        for (int i = 0; i < files.size(); i++) {
+            if(files.get(i).getId() == tableid){
+                return pkeyFields.get(i);
+            }
+        }
+        return "";
     }
 
     public Iterator<Integer> tableIdIterator() {
-        // some code goes here
-        return null;
+        final Stream<Integer> integerStream = files.stream().map(f -> f.getId());
+        return integerStream.collect(Collectors.toList()).iterator();
     }
 
     public String getTableName(int id) {
-        // some code goes here
-        return null;
+        for (int i = 0; i < files.size(); i++) {
+            if(files.get(i).getId() == id){
+                return names.get(i);
+            }
+        }
+        return "";
     }
     
     /** Delete all tables from the catalog */
     public void clear() {
-        // some code goes here
+    	this.files.clear();
+    	this.pkeyFields.clear();
+    	this.names.clear();
     }
     
     /**
