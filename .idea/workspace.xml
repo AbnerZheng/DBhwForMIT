@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="72cb0f2e-67b8-4cd9-a84f-4a4dae3f433d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/simpledb/RecordId.java" afterPath="$PROJECT_DIR$/src/java/simpledb/RecordId.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/simpledb/HeapPage.java" afterPath="$PROJECT_DIR$/src/java/simpledb/HeapPage.java" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/src/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,24 +21,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Catalog.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/java/simpledb/Catalog.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
-              <caret line="30" column="11" lean-forward="false" selection-start-line="30" selection-start-column="11" selection-end-line="30" selection-end-column="11" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2152#2153#0" expanded="true" />
-                <element signature="e#2192#2193#0" expanded="true" />
-                <element signature="e#2579#2580#0" expanded="true" />
-                <element signature="e#2641#2642#0" expanded="true" />
-                <element signature="e#5985#5993#0" expanded="true" />
-                <element signature="e#6050#6056#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="BufferPool.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/java/simpledb/BufferPool.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -86,15 +68,39 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RecordId.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RecordId.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/java/simpledb/RecordId.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="67" column="46" lean-forward="true" selection-start-line="67" selection-start-column="46" selection-end-line="67" selection-end-column="49" />
+            <state relative-caret-position="300">
+              <caret line="57" column="4" lean-forward="false" selection-start-line="57" selection-start-column="4" selection-end-line="57" selection-end-column="4" />
               <folding>
                 <element signature="e#1733#1734#0" expanded="true" />
                 <element signature="e#1799#1800#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HeapPage.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/java/simpledb/HeapPage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="247">
+              <caret line="319" column="40" lean-forward="false" selection-start-line="319" selection-start-column="40" selection-end-line="319" selection-end-column="40" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#3532#3533#0" expanded="true" />
+                <element signature="e#3560#3561#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HeapPageReadTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/simpledb/HeapPageReadTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="152">
+              <caret line="87" column="0" lean-forward="false" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -108,16 +114,6 @@
                 <element signature="e#1550#1551#0" expanded="true" />
                 <element signature="e#1610#1611#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DbFile.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/java/simpledb/DbFile.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="13" column="17" lean-forward="false" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -177,6 +173,7 @@
         <option value="$PROJECT_DIR$/src/java/simpledb/BufferPool.java" />
         <option value="$PROJECT_DIR$/src/java/simpledb/HeapPageId.java" />
         <option value="$PROJECT_DIR$/src/java/simpledb/RecordId.java" />
+        <option value="$PROJECT_DIR$/src/java/simpledb/HeapPage.java" />
       </list>
     </option>
   </component>
@@ -233,7 +230,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
-    <property name="SearchEverywhereHistoryKey" value="Record&#9;PSI&#9;JAVA://simpledb.RecordIdTest&#10;HeapPageI&#9;PSI&#9;JAVA://simpledb.HeapPageIdTest&#10;HeapPageId&#9;PSI&#9;JAVA://simpledb.HeapPageId&#10;buffer&#9;PSI&#9;JAVA://simpledb.BufferPool&#10;Catalog&#9;PSI&#9;JAVA://simpledb.CatalogTest&#10;Recor&#9;PSI&#9;JAVA://simpledb.RecordId&#10;TupleTest&#9;PSI&#9;JAVA://simpledb.TupleTest&#10;TupleD&#9;PSI&#9;JAVA://simpledb.TupleDescTest&#10;tuple&#9;PSI&#9;JAVA://simpledb.Tuple&#10;TupleDes&#9;PSI&#9;JAVA://simpledb.TupleDesc" />
+    <property name="SearchEverywhereHistoryKey" value="HeapPageRe&#9;PSI&#9;JAVA://simpledb.HeapPageReadTest&#10;heapPage&#9;PSI&#9;JAVA://simpledb.HeapPage&#10;Record&#9;PSI&#9;JAVA://simpledb.RecordIdTest&#10;HeapPageI&#9;PSI&#9;JAVA://simpledb.HeapPageIdTest&#10;HeapPageId&#9;PSI&#9;JAVA://simpledb.HeapPageId&#10;buffer&#9;PSI&#9;JAVA://simpledb.BufferPool&#10;Catalog&#9;PSI&#9;JAVA://simpledb.CatalogTest&#10;Recor&#9;PSI&#9;JAVA://simpledb.RecordId&#10;TupleTest&#9;PSI&#9;JAVA://simpledb.TupleTest&#10;TupleD&#9;PSI&#9;JAVA://simpledb.TupleDescTest&#10;tuple&#9;PSI&#9;JAVA://simpledb.Tuple&#10;TupleDes&#9;PSI&#9;JAVA://simpledb.TupleDesc" />
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.JavaDocs" value="true" />
     <property name="Repository.Attach.Sources" value="true" />
@@ -261,7 +258,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.RecordIdTest">
+  <component name="RunManager" selected="JUnit.HeapPageReadTest">
     <configuration name="CatalogTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -312,6 +309,56 @@
       <envs />
       <patterns />
     </configuration>
+    <configuration name="HeapPageReadTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="simpledb.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="simpledb" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="simpledb" />
+      <option name="MAIN_CLASS_NAME" value="simpledb.HeapPageReadTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration name="HeapPageReadTest.getNumEmptySlots" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="simpledb.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="simpledb" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="simpledb" />
+      <option name="MAIN_CLASS_NAME" value="simpledb.HeapPageReadTest" />
+      <option name="METHOD_NAME" value="getNumEmptySlots" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
     <configuration name="RecordIdTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -324,56 +371,6 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="simpledb" />
       <option name="MAIN_CLASS_NAME" value="simpledb.RecordIdTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-    <configuration name="TupleDescTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="simpledb.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="simpledb" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="simpledb" />
-      <option name="MAIN_CLASS_NAME" value="simpledb.TupleDescTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-    <configuration name="TupleTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="simpledb.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="simpledb" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="simpledb" />
-      <option name="MAIN_CLASS_NAME" value="simpledb.TupleTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -468,19 +465,19 @@
       <listeners />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.TupleDescTest" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.TupleTest" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.CatalogTest" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.HeapPageIdTest" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.RecordIdTest" />
+      <item index="0" class="java.lang.String" itemvalue="JUnit.CatalogTest" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.HeapPageIdTest" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.RecordIdTest" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.HeapPageReadTest" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.HeapPageReadTest.getNumEmptySlots" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.RecordIdTest" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.HeapPageIdTest" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.CatalogTest" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.TupleTest" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.TupleDescTest" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.HeapPageReadTest" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.HeapPageReadTest.getNumEmptySlots" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.RecordIdTest" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.HeapPageIdTest" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.CatalogTest" />
       </list>
     </recent_temporary>
   </component>
@@ -500,44 +497,44 @@
       <workItem from="1512017883025" duration="495000" />
       <workItem from="1512054227392" duration="5492000" />
       <workItem from="1512100973430" duration="2449000" />
-      <workItem from="1512143811242" duration="2860000" />
+      <workItem from="1512143811242" duration="6987000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="CatalogTest - 2017.12.01 at 23h 57m 14s.xml">
-      <configuration name="CatalogTest" configurationId="JUnit" />
+    <history-entry file="HeapPageReadTest - 2017.12.02 at 15h 55m 07s.xml">
+      <configuration name="HeapPageReadTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CatalogTest - 2017.12.01 at 23h 58m 48s.xml">
-      <configuration name="CatalogTest" configurationId="JUnit" />
+    <history-entry file="HeapPageReadTest - 2017.12.02 at 15h 56m 33s.xml">
+      <configuration name="HeapPageReadTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CatalogTest - 2017.12.02 at 00h 03m 44s.xml">
-      <configuration name="CatalogTest" configurationId="JUnit" />
+    <history-entry file="HeapPageReadTest - 2017.12.02 at 16h 07m 54s.xml">
+      <configuration name="HeapPageReadTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CatalogTest - 2017.12.02 at 00h 06m 00s.xml">
-      <configuration name="CatalogTest" configurationId="JUnit" />
+    <history-entry file="HeapPageReadTest_getNumEmptySlots - 2017.12.02 at 15h 33m 22s.xml">
+      <configuration name="HeapPageReadTest.getNumEmptySlots" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CatalogTest - 2017.12.02 at 00h 06m 20s.xml">
-      <configuration name="CatalogTest" configurationId="JUnit" />
+    <history-entry file="HeapPageReadTest_getNumEmptySlots - 2017.12.02 at 15h 34m 04s.xml">
+      <configuration name="HeapPageReadTest.getNumEmptySlots" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CatalogTest - 2017.12.02 at 00h 43m 34s.xml">
-      <configuration name="CatalogTest" configurationId="JUnit" />
+    <history-entry file="HeapPageReadTest_getNumEmptySlots - 2017.12.02 at 15h 34m 21s.xml">
+      <configuration name="HeapPageReadTest.getNumEmptySlots" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="HeapPageIdTest - 2017.12.02 at 00h 43m 49s.xml">
-      <configuration name="HeapPageIdTest" configurationId="JUnit" />
+    <history-entry file="HeapPageReadTest_getNumEmptySlots - 2017.12.02 at 15h 46m 39s.xml">
+      <configuration name="HeapPageReadTest.getNumEmptySlots" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="HeapPageIdTest - 2017.12.02 at 00h 50m 04s.xml">
-      <configuration name="HeapPageIdTest" configurationId="JUnit" />
+    <history-entry file="HeapPageReadTest_getNumEmptySlots - 2017.12.02 at 15h 46m 46s.xml">
+      <configuration name="HeapPageReadTest.getNumEmptySlots" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="RecordIdTest - 2017.12.02 at 00h 53m 02s.xml">
-      <configuration name="RecordIdTest" configurationId="JUnit" />
+    <history-entry file="HeapPageReadTest_getNumEmptySlots - 2017.12.02 at 15h 53m 53s.xml">
+      <configuration name="HeapPageReadTest.getNumEmptySlots" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="RecordIdTest - 2017.12.02 at 00h 54m 00s.xml">
-      <configuration name="RecordIdTest" configurationId="JUnit" />
+    <history-entry file="HeapPageReadTest_getNumEmptySlots - 2017.12.02 at 15h 54m 59s.xml">
+      <configuration name="HeapPageReadTest.getNumEmptySlots" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11296000" />
+    <option name="totallyTimeSpent" value="15423000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -566,15 +563,15 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287483" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24232633" sideWeight="0.4918033" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24232633" sideWeight="0.48360655" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24959612" sideWeight="0.4918033" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24959612" sideWeight="0.4918033" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24232633" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24959612" sideWeight="0.5081967" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39889959" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24232633" sideWeight="0.5163934" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -620,7 +617,21 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/java/simpledb/HeapPage.java</url>
+          <line>289</line>
+          <properties />
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/java/simpledb/HeapPage.java</url>
+          <line>284</line>
+          <properties />
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="6" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -995,6 +1006,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/simpledb/PageId.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test/simpledb/RecordIdTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="394">
@@ -1006,21 +1025,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/simpledb/PageId.java">
+    <entry file="file://$PROJECT_DIR$/src/java/simpledb/RecordId.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="300">
+          <caret line="57" column="4" lean-forward="false" selection-start-line="57" selection-start-column="4" selection-end-line="57" selection-end-column="4" />
+          <folding>
+            <element signature="e#1733#1734#0" expanded="true" />
+            <element signature="e#1799#1800#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/simpledb/HeapPageReadTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="87" column="0" lean-forward="false" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/simpledb/RecordId.java">
+    <entry file="file://$PROJECT_DIR$/src/java/simpledb/HeapPage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="67" column="46" lean-forward="true" selection-start-line="67" selection-start-column="46" selection-end-line="67" selection-end-column="49" />
+        <state relative-caret-position="247">
+          <caret line="319" column="40" lean-forward="false" selection-start-line="319" selection-start-column="40" selection-end-line="319" selection-end-column="40" />
           <folding>
-            <element signature="e#1733#1734#0" expanded="true" />
-            <element signature="e#1799#1800#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#3532#3533#0" expanded="true" />
+            <element signature="e#3560#3561#0" expanded="true" />
           </folding>
         </state>
       </provider>
