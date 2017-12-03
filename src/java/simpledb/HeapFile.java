@@ -69,7 +69,8 @@ public class HeapFile implements DbFile {
         byte[] data = new byte[BufferPool.getPageSize()];
         try {
             final RandomAccessFile rw = new RandomAccessFile(file, "rw");
-            final int read = rw.read(data, offset, BufferPool.getPageSize()) ;
+            rw.seek(offset);
+            final int read = rw.read(data) ;
             final HeapPageId heapPageId = new HeapPageId(pid.getTableId(), pid.getPageNumber());
             return new HeapPage(heapPageId, data);
         } catch (IOException e) {
@@ -158,7 +159,10 @@ public class HeapFile implements DbFile {
 
             @Override
             public void rewind() throws DbException, TransactionAbortedException {
-
+                this.pid = 0;
+                this.next = null;
+                HeapPage heapPage = (HeapPage) Database.getBufferPool().getPage(tid, new HeapPageId(getId(), pid), Permissions.READ_ONLY);
+                this.iterator = heapPage.iterator();
             }
 
             @Override
