@@ -56,7 +56,6 @@ public class JoinPredicate implements Serializable {
     
     public Predicate.Op getOperator()
     {
-        // some code goes here
         return op;
     }
 }

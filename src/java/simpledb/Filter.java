@@ -8,6 +8,8 @@ import java.util.*;
 public class Filter extends Operator {
 
     private static final long serialVersionUID = 1L;
+    private final Predicate predicate;
+    private OpIterator opIterator;
 
     /**
      * Constructor accepts a predicate to apply and a child operator to read
@@ -19,30 +21,31 @@ public class Filter extends Operator {
      *            The child operator
      */
     public Filter(Predicate p, OpIterator child) {
-        // some code goes here
+    	this.predicate = p;
+    	this.opIterator = child;
     }
 
     public Predicate getPredicate() {
-        // some code goes here
-        return null;
+    	return predicate;
     }
 
     public TupleDesc getTupleDesc() {
-        // some code goes here
-        return null;
+    	return opIterator.getTupleDesc();
     }
 
     public void open() throws DbException, NoSuchElementException,
             TransactionAbortedException {
-        // some code goes here
+    	super.open();
+        this.opIterator.open();
     }
 
     public void close() {
-        // some code goes here
+    	super.close();
+    	this.opIterator.close();
     }
 
     public void rewind() throws DbException, TransactionAbortedException {
-        // some code goes here
+    	this.opIterator.rewind();
     }
 
     /**
@@ -56,19 +59,24 @@ public class Filter extends Operator {
      */
     protected Tuple fetchNext() throws NoSuchElementException,
             TransactionAbortedException, DbException {
-        // some code goes here
-        return null;
+    	while (this.opIterator.hasNext()){
+		    final Tuple next = this.opIterator.next();
+		    final boolean filter = predicate.filter(next);
+		    if(filter){
+		    	return next;
+		    }
+	    }
+	    return null;
     }
 
-    @Override
-    public OpIterator[] getChildren() {
-        // some code goes here
-        return null;
-    }
+	@Override
+	public OpIterator[] getChildren() {
+		return new OpIterator[]{this.opIterator};
+	}
 
-    @Override
-    public void setChildren(OpIterator[] children) {
-        // some code goes here
-    }
-
+	@Override
+	public void setChildren(OpIterator[] children) {
+		assert children.length == 1;
+		this.opIterator = children[0];
+	}
 }

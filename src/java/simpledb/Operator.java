@@ -3,7 +3,8 @@ package simpledb;
 import java.util.NoSuchElementException;
 
 /**
- * Abstract class for implementing operators. It handles <code>close</code>,
+ * Abstract class for implementing operators.
+ * It handles <code>close</code>,
  * <code>next</code> and <code>hasNext</code>. Subclasses only need to implement
  * <code>open</code> and <code>readNext</code>.
  */
