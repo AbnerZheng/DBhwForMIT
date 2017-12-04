@@ -1,13 +1,22 @@
 package simpledb;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 /**
  * Knows how to compute some aggregate over a set of StringFields.
  */
 public class StringAggregator implements Aggregator {
 
     private static final long serialVersionUID = 1L;
+	private final Op op;
+	private final int afield;
+	private final Type gbFieldType;
+	private final int gbField;
+	private final HashMap<Field, Integer> groupData;
 
-    /**
+	/**
      * Aggregate constructor
      * @param gbfield the 0-based index of the group-by field in the tuple, or NO_GROUPING if there is no grouping
      * @param gbfieldtype the type of the group by field (e.g., Type.INT_TYPE), or null if there is no grouping
@@ -17,7 +26,14 @@ public class StringAggregator implements Aggregator {
      */
 
     public StringAggregator(int gbfield, Type gbfieldtype, int afield, Op what) {
-        // some code goes here
+    	this.gbField = gbfield;
+    	this.gbFieldType = gbfieldtype;
+    	this.afield = afield;
+    	this.op = what;
+    	if(what != Op.COUNT){
+    		throw new IllegalArgumentException();
+	    }
+	    this.groupData = new HashMap<>();
     }
 
     /**
@@ -25,7 +41,18 @@ public class StringAggregator implements Aggregator {
      * @param tup the Tuple containing an aggregate field and a group-by field
      */
     public void mergeTupleIntoGroup(Tuple tup) {
-        // some code goes here
+    	Field key;
+    	if(gbField == NO_GROUPING){
+			key = null;
+	    }else{
+		    key = tup.getField(gbField);
+	    }
+	    groupData.compute(key, (k,v)->{
+			if(v == null){
+				return 1;
+			}
+			return v + 1;
+	    });
     }
 
     /**
@@ -37,8 +64,52 @@ public class StringAggregator implements Aggregator {
      *   aggregate specified in the constructor.
      */
     public OpIterator iterator() {
-        // some code goes here
-        throw new UnsupportedOperationException("please implement me for lab2");
+    	return new OpIterator() {
+		    private Iterator<Field> keyIterator;
+		    private boolean opened;
+		    @Override
+		    public void open() throws DbException, TransactionAbortedException {
+				opened = true;
+				keyIterator = groupData.keySet().iterator();
+		    }
+
+		    @Override
+		    public boolean hasNext() throws DbException, TransactionAbortedException {
+		    	if(!opened) throw new DbException("not opened");
+			    return keyIterator.hasNext();
+		    }
+
+		    @Override
+		    public Tuple next() throws DbException, TransactionAbortedException, NoSuchElementException {
+		    	if(hasNext()){
+				    final Field key = keyIterator.next();
+				    final Tuple tuple = new Tuple(getTupleDesc());
+				    tuple.setField(0, key);
+				    tuple.setField(1, new IntField(groupData.get(key)));
+				    return tuple;
+			    }
+			    throw new NoSuchElementException();
+		    }
+
+		    @Override
+		    public void rewind() throws DbException, TransactionAbortedException {
+				if(!opened) throw new DbException("not opened");
+				keyIterator = groupData.keySet().iterator();
+		    }
+
+		    @Override
+		    public TupleDesc getTupleDesc() {
+		    	Type[] types = new Type[2];
+		    	types[0] = gbFieldType;
+		    	types[1] = Type.INT_TYPE;
+			    return new TupleDesc(types);
+		    }
+
+		    @Override
+		    public void close() {
+				opened = false;
+		    }
+	    };
     }
 
 }
