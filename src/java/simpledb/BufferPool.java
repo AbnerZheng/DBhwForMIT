@@ -1,5 +1,6 @@
 package simpledb;
 
+import javax.xml.crypto.Data;
 import java.io.*;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -136,7 +137,7 @@ public class BufferPool {
      * Marks any pages that were dirtied by the operation as dirty by calling
      * their markDirty bit, and adds versions of any pages that have 
      * been dirtied to the cache (replacing any existing versions of those pages) so 
-     * that future requests see up-to-date pages. 
+     * that future requests see up-to-date pages.
      *
      * @param tid the transaction adding the tuple
      * @param tableId the table to add the tuple to
@@ -144,8 +145,9 @@ public class BufferPool {
      */
     public void insertTuple(TransactionId tid, int tableId, Tuple t)
         throws DbException, IOException, TransactionAbortedException {
-        // some code goes here
-        // not necessary for lab1
+        final HeapPage page = (HeapPage) getPage(tid, t.getRecordId().getPageId(), Permissions.READ_WRITE);
+        page.insertTuple(t);
+        page.markDirty(true, tid);
     }
 
     /**
@@ -163,8 +165,9 @@ public class BufferPool {
      */
     public  void deleteTuple(TransactionId tid, Tuple t)
         throws DbException, IOException, TransactionAbortedException {
-        // some code goes here
-        // not necessary for lab1
+        final HeapPage page = (HeapPage) getPage(tid, t.getRecordId().getPageId(), Permissions.READ_WRITE);
+        page.deleteTuple(t);
+        page.markDirty(true, tid);
     }
 
     /**
