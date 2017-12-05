@@ -3,6 +3,7 @@ package simpledb;
 import javax.xml.crypto.Data;
 import java.io.*;
 
+import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -145,9 +146,20 @@ public class BufferPool {
      */
     public void insertTuple(TransactionId tid, int tableId, Tuple t)
         throws DbException, IOException, TransactionAbortedException {
-        final HeapPage page = (HeapPage) getPage(tid, t.getRecordId().getPageId(), Permissions.READ_WRITE);
-        page.insertTuple(t);
-        page.markDirty(true, tid);
+        final DbFile databaseFile = Database.getCatalog().getDatabaseFile(tableId);
+        final ArrayList<Page> pages = databaseFile.insertTuple(tid, t);
+        pages.forEach(page->{
+            page.markDirty(true, tid);
+            for (int i = 0; i <this.buffer.length ; i++) {
+                Page page2 = this.buffer[i];
+                if(page2 != null && page2.getId().equals(page.getId())){
+                	this.buffer[i] = page;
+                	return;
+                }
+            }
+            this.buffer[nextId++] = page;
+        });
+
     }
 
     /**
@@ -165,9 +177,11 @@ public class BufferPool {
      */
     public  void deleteTuple(TransactionId tid, Tuple t)
         throws DbException, IOException, TransactionAbortedException {
-        final HeapPage page = (HeapPage) getPage(tid, t.getRecordId().getPageId(), Permissions.READ_WRITE);
-        page.deleteTuple(t);
-        page.markDirty(true, tid);
+        final DbFile databaseFile = Database.getCatalog().getDatabaseFile(t.getRecordId().getPageId().getTableId());
+        final ArrayList<Page> pages = databaseFile.deleteTuple(tid, t);
+        pages.forEach(page->{
+            page.markDirty(true, tid);
+        });
     }
 
     /**
@@ -182,13 +196,13 @@ public class BufferPool {
     }
 
     /** Remove the specific page id from the buffer pool.
-        Needed by the recovery manager to ensure that the
-        buffer pool doesn't keep a rolled back page in its
-        cache.
-        
-        Also used by B+ tree files to ensure that deleted pages
-        are removed from the cache so they can be reused safely
-    */
+     Needed by the recovery manager to ensure that the
+     buffer pool doesn't keep a rolled back page in its
+     cache.
+
+     Also used by B+ tree files to ensure that deleted pages
+     are removed from the cache so they can be reused safely
+     */
     public synchronized void discardPage(PageId pid) {
         // some code goes here
         // not necessary for lab1

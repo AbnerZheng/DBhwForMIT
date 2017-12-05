@@ -110,4 +110,22 @@ public class Tuple implements Serializable {
     {
     	this.schema = td;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+    	if(obj instanceof Tuple){
+            final Tuple tuple = (Tuple) obj;
+            if(tuple.getTupleDesc().equals(getTupleDesc())){
+                if(getRecordId().equals(tuple.getRecordId())){
+                    for (int i = 0; i < field.length; i++) {
+                        if(!getField(i).equals(tuple.getField(i))){
+                           return false;
+                        }
+                    }
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
