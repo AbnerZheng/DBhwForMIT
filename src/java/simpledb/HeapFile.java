@@ -95,9 +95,28 @@ public class HeapFile implements DbFile {
     // see DbFile.java for javadocs
     public ArrayList<Page> insertTuple(TransactionId tid, Tuple t)
             throws DbException, IOException, TransactionAbortedException {
-        // some code goes here
-        return null;
-        // not necessary for lab1
+        final int numPages = numPages();
+        final int id = getId();
+        final BufferPool bufferPool = Database.getBufferPool();
+        HeapPage page = null;
+        int i;
+        for (i = 0; i < numPages; i++) {
+            page =(HeapPage) bufferPool.getPage(tid, new HeapPageId(id, i), Permissions.READ_WRITE);
+            if(page.getNumEmptySlots()>0){
+                page.insertTuple(t);
+                break;
+            }
+        }
+        if(i == numPages){
+            final RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rw");
+            randomAccessFile.seek(randomAccessFile.length());
+            randomAccessFile.write(HeapPage.createEmptyPageData());
+            page = (HeapPage) bufferPool.getPage(tid, new HeapPageId(id, i), Permissions.READ_WRITE);
+            page.insertTuple(t);
+        }
+        final ArrayList<Page> pages = new ArrayList<>();
+        pages.add(page);
+        return pages;
     }
 
     // see DbFile.java for javadocs
