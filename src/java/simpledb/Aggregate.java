@@ -51,6 +51,8 @@ public class Aggregate extends Operator {
 	    	childAggregator = new StringAggregator(gfield, groupType, afield, aop);
 	    }
 	    try {
+	    	child.rewind();
+	    	child.open();
 		    while (child.hasNext()){
 			    final Tuple next = child.next();
 			    childAggregator.mergeTupleIntoGroup(next);

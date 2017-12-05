@@ -107,7 +107,7 @@ public class IntegerAggregator implements Aggregator {
 				});
 				break;
 			case COUNT:
-				this.groupCount.compute(key, (k,v)->{
+				this.groupData.compute(key, (k,v)->{
 					if(v != null){
 						return v+1;
 					}else{
@@ -162,7 +162,7 @@ public class IntegerAggregator implements Aggregator {
 						result = new IntField(groupData.get(key));
 						break;
 					case COUNT:
-						result = new IntField(groupCount.get(key));
+						result = new IntField(groupData.get(key));
 						break;
 					case AVG:
 						final int i = groupData.get(key) / groupCount.get(key);
