@@ -11,7 +11,7 @@ public class Insert extends Operator {
     private static final long serialVersionUID = 1L;
     private final OpIterator[] children = new OpIterator[1];
     private int count;
-    private boolean opend = false;
+    private boolean open = false;
     private int nextIndex = 0;
 
     /**
@@ -52,11 +52,11 @@ public class Insert extends Operator {
     }
 
     public void open() throws DbException, TransactionAbortedException {
-    	this.opend = true;
+    	super.open();
     }
 
     public void close() {
-    	this.opend = false;
+    	super.close();
     }
 
     public void rewind() throws DbException, TransactionAbortedException {
