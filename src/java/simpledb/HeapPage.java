@@ -277,6 +277,7 @@ public class HeapPage implements Page {
                     slotIndex += 1;
                     b = (byte)((b >>> 1) & 0xff);
                 }
+                break;
             }
         }
         markSlotUsed(slotIndex, true);
