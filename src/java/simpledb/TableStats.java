@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class TableStats {
 
-    private static final ConcurrentHashMap<String, TableStats> statsMap = new ConcurrentHashMap<String, TableStats>();
+    private static final ConcurrentHashMap<String, TableStats> statsMap = new ConcurrentHashMap<>();
 
     static final int IOCOSTPERPAGE = 1000;
 
@@ -85,7 +85,11 @@ public class TableStats {
         // necessarily have to (for example) do everything
         // in a single scan of the table.
         // some code goes here
+        final DbFile databaseFile = Database.getCatalog().getDatabaseFile(tableid);
+        final DbFileIterator iterator = databaseFile.iterator(new TransactionId());
+
     }
+
 
     /**
      * Estimates the cost of sequentially scanning the file, given that the cost
