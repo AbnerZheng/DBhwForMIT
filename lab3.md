@@ -329,8 +329,7 @@ you will need in later exercises).
 You should fill in the following methods and classes in <tt>TableStats</tt>:
   
 *  Implement the <tt>TableStats</tt>  constructor:
-Once you have
-implemented a method for tracking statistics such as histograms, you
+Once you have implemented a method for tracking statistics such as histograms, you
 should implement the <tt>TableStats</tt> constructor, adding code
 to scan the table (possibly multiple times) to build the statistics
 you need.

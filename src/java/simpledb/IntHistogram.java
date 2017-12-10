@@ -54,6 +54,11 @@ public class IntHistogram {
 		count += 1;
 	}
 
+	private boolean between(int v){
+		return v >= min && v <= max;
+	}
+
+
 	/**
 	 * Estimate the selectivity of a particular predicate and operand on this table.
 	 * <p>
@@ -65,13 +70,14 @@ public class IntHistogram {
 	 * @return Predicted selectivity of this particular operator and value
 	 */
 	public double estimateSelectivity(Predicate.Op op, int v) {
-		double result = 0;
 		double fraction[] = new double[length];
 		final int index = indexOfValue(v);
+		final boolean between = between(v);
 		switch (op) {
 			case EQUALS:
 			case NOT_EQUALS:
-				fraction[index] =1.0 * (length - 1) / (max - min);
+				if(between)
+					fraction[index] = 1.0 * (length - 1) / (max - min);
 				break;
 			case LESS_THAN:
 			case LESS_THAN_OR_EQ:
@@ -81,6 +87,8 @@ public class IntHistogram {
 					fraction[i] = 1;
 				}
 				fraction[index] = (v - (min + 1.0 * (max - min) / (length - 1) * index)) * (length - 1) / (max - min);
+				fraction[index] = Math.min(fraction[index], 1);
+				fraction[index] = Math.max(fraction[index], 0);
 				break;
 
 		}
@@ -92,13 +100,21 @@ public class IntHistogram {
 				}
 				break;
 			case LESS_THAN_OR_EQ:
-				fraction[index] += 1.0 * (length - 1) / (max - min);
+				if(between) {
+					fraction[index] += 1.0 * (length - 1) / (max - min);
+					fraction[index] = Math.max(fraction[index], 0);
+					fraction[index] = Math.min(fraction[index], 1);
+				}
 				break;
 			case GREATER_THAN_OR_EQ:
 				for (int i = 0; i < length; i++) {
 					fraction[i] = 1 - fraction[i];
 				}
-				fraction[index] += 1.0 * (length - 1) / (max - min);
+				if(between) {
+					fraction[index] += 1.0 * (length - 1) / (max - min);
+					fraction[index] = Math.max(fraction[index], 0);
+					fraction[index] = Math.min(fraction[index], 1);
+				}
 				break;
 			default:
 				break;
