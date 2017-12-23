@@ -38,27 +38,28 @@ public class LogicalPlan {
     private String query;
 //    private Query owner;
 
-    /** Constructor -- generate an empty logical plan */
+    /**
+     * Constructor -- generate an empty logical plan
+     **/
     public LogicalPlan() {
-        joins = new Vector<LogicalJoinNode>();
-        filters = new Vector<LogicalFilterNode>();
-        tables = new Vector<LogicalScanNode>();
-        subplanMap = new HashMap<String, OpIterator>();
-        tableMap = new HashMap<String,Integer>();
+        joins = new Vector<>();
+        filters = new Vector<>();
+        tables = new Vector<>();
+        subplanMap = new HashMap<>();
+        tableMap = new HashMap<>();
 
-        selectList = new Vector<LogicalSelectListNode>();
+        selectList = new Vector<>();
         this.query = "";
     }
 
-    /** Set the text of the query representing this logical plan.  Does NOT parse the
-        specified query -- this method is just used so that the object can print the
-        SQL it represents.
-
-        @param query the text of the query associated with this plan
-    */
-    public void setQuery(String query)  {
-        this.query = query;
-    }
+    /**
+     * Set the text of the query representing this logical plan.  Does NOT parse the
+     * specified query -- this method is just used so that the object can print the
+     * SQL it represents.
+     *
+     *  @param query the text of the query associated with this plan
+    **/
+    public void setQuery(String query)  { this.query = query; }
       
     /** Get the query text associated with this plan via {@link #setQuery}.
      */
@@ -226,7 +227,7 @@ public class LogicalPlan {
     String disambiguateName(String name) throws ParsingException {
 
         String[] fields = name.split("[.]");
-        if (fields.length == 2 && (!fields[0].equals("null")))
+        if (fields.length == 2 && (!fields[0].equals("null"))) // if the name parameter is already que
             return name;
         if (fields.length > 2) 
             throw new ParsingException("Field " + name + " is not a valid field reference.");
@@ -258,8 +259,9 @@ public class LogicalPlan {
 
     }
 
-    /** Convert the aggregate operator name s into an Aggregator.op operation.
-     *  @throws ParsingException if s is not a valid operator name 
+    /**
+     * Convert the aggregate operator name s into an Aggregator.op operation.
+     * @throws ParsingException if s is not a valid operator name
      */
     static Aggregator.Op getAggOp(String s) throws ParsingException {
         s = s.toUpperCase();
@@ -271,10 +273,12 @@ public class LogicalPlan {
         throw new ParsingException("Unknown predicate " + s);
     }
 
-    /** Convert this LogicalPlan into a physicalPlan represented by a {@link OpIterator}.  Attempts to
-     *   find the optimal plan by using {@link JoinOptimizer#orderJoins} to order the joins in the plan.
-     *  @param t The transaction that the returned OpIterator will run as a part of
-     *  @param baseTableStats a HashMap providing a {@link TableStats}
+    /**
+     * Convert this LogicalPlan into a physicalPlan represented by a {@link OpIterator}.
+     * Attempts to find the optimal plan by using {@link JoinOptimizer#orderJoins}
+     * to order the joins in the plan.
+     * @param t The transaction that the returned OpIterator will run as a part of
+     * @param baseTableStats a HashMap providing a {@link TableStats}
      *    object for each table used in the LogicalPlan.  This should
      *    have one entry for each table referenced by the plan, not one
      *    entry for each table alias (so a table t aliases as t1 and
@@ -286,13 +290,13 @@ public class LogicalPlan {
      */ 
     public OpIterator physicalPlan(TransactionId t, Map<String,TableStats> baseTableStats, boolean explain) throws ParsingException {
         Iterator<LogicalScanNode> tableIt = tables.iterator();
-        HashMap<String,String> equivMap = new HashMap<String,String>();
-        HashMap<String,Double> filterSelectivities = new HashMap<String, Double>();
-        HashMap<String,TableStats> statsMap = new HashMap<String,TableStats>();
+        HashMap<String,String> equivMap = new HashMap<>();
+        HashMap<String,Double> filterSelectivities = new HashMap<>();
+        HashMap<String,TableStats> statsMap = new HashMap<>();
 
         while (tableIt.hasNext()) {
             LogicalScanNode table = tableIt.next();
-            SeqScan ss = null;
+            SeqScan ss;
             try {
                  ss = new SeqScan(t, Database.getCatalog().getDatabaseFile(table.t).getId(), table.alias);
             } catch (NoSuchElementException e) {
@@ -406,11 +410,11 @@ public class LogicalPlan {
             throw new ParsingException("Query does not include join expressions joining all nodes!");
         }
         
-        OpIterator node =  (OpIterator)(subplanMap.entrySet().iterator().next().getValue());
+        OpIterator node = subplanMap.entrySet().iterator().next().getValue();
 
         //walk the select list, to determine order in which to project output fields
-        ArrayList<Integer> outFields = new ArrayList<Integer>();
-        ArrayList<Type> outTypes = new ArrayList<Type>();
+        ArrayList<Integer> outFields = new ArrayList<>();
+        ArrayList<Type> outTypes = new ArrayList<>();
         for (int i = 0; i < selectList.size(); i++) {
             LogicalSelectListNode si = selectList.elementAt(i);
             if (si.aggOp != null) {
@@ -483,12 +487,14 @@ public class LogicalPlan {
 
     public static void main(String argv[]) {
         // construct a 3-column table schema
-        Type types[] = new Type[]{ Type.INT_TYPE, Type.INT_TYPE, Type.INT_TYPE };
-        String names[] = new String[]{ "field0", "field1", "field2" };
+        Type types[] = new Type[]{
+            Type.INT_TYPE, Type.INT_TYPE, Type.INT_TYPE
+        };
+        String names[] = new String[]{"field0", "field1", "field2"};
 
         TupleDesc td = new TupleDesc(types, names);
         TableStats ts;
-        HashMap<String, TableStats> tableMap = new HashMap<String,TableStats>();
+        HashMap<String, TableStats> tableMap = new HashMap<>();
 
         // create the tables, associate them with the data files
         // and tell the catalog about the schema  the tables.
@@ -500,7 +506,7 @@ public class LogicalPlan {
         TransactionId tid = new TransactionId();
 
         LogicalPlan lp = new LogicalPlan();
-        
+
         lp.addScan(table1.getId(), "t1");
 
         try {

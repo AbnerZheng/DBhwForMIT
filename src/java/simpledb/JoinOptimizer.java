@@ -199,11 +199,9 @@ public class JoinOptimizer {
     public <T> Set<Set<T>> enumerateSubsets(Vector<T> v, int size) {
         Set<Set<T>> els = new HashSet<Set<T>>();
         els.add(new HashSet<T>());
-        // Iterator<Set> it;
-        // long start = System.currentTimeMillis();
 
         for (int i = 0; i < size; i++) {
-            Set<Set<T>> newels = new HashSet<Set<T>>();
+            Set<Set<T>> newels = new HashSet<>();
             for (Set<T> s : els) {
                 for (T t : v) {
                     Set<T> news = (Set<T>) (((HashSet<T>) s).clone());
@@ -215,7 +213,6 @@ public class JoinOptimizer {
         }
 
         return els;
-
     }
 
     /**
@@ -243,13 +240,34 @@ public class JoinOptimizer {
         HashMap<String, Double> filterSelectivities, boolean explain)
         throws ParsingException {
         //Not necessary for labs 1--3
+        double bestSoFar = Double.MAX_VALUE;
+        PlanCache planCache = new PlanCache();
 
-        // some code goes here
-        //Replace the following
-        return joins;
+        for (int i = 1; i <= this.joins.size(); i++) {
+            final Set<Set<LogicalJoinNode>> sets = enumerateSubsets(this.joins, i);
+            final Iterator<Set<LogicalJoinNode>> iterator = sets.iterator();
+            while (iterator.hasNext()) {
+                final Set<LogicalJoinNode> set = iterator.next();
+                final Iterator<LogicalJoinNode> itemIterator = set.iterator();
+                boolean start = true;
+                while (itemIterator.hasNext()) {
+                    final LogicalJoinNode item = itemIterator.next();
+                    if (start) {
+                        bestSoFar = Double.MAX_VALUE;
+                        start = false;
+                    }
+                    final CostCard costCard = computeCostAndCardOfSubplan(stats, filterSelectivities, item, set, bestSoFar, planCache);
+                    if (costCard != null) {
+                        planCache.addPlan(set, costCard.cost, costCard.card, costCard.plan);
+                        bestSoFar = costCard.cost;
+                    }
+                }
+            }
+        }
+        return planCache.getOrder(new HashSet<>(joins));
     }
 
-    // ===================== Private Methods =================================
+// ===================== Private Methods =================================
 
     /**
      * This is a helper method that computes the cost and cardinality of joining
@@ -289,9 +307,7 @@ public class JoinOptimizer {
         double bestCostSoFar, PlanCache pc) throws ParsingException {
 
         LogicalJoinNode j = joinToRemove;
-
         Vector<LogicalJoinNode> prevBest;
-
         if (this.p.getTableId(j.t1Alias) == null)
             throw new ParsingException("Unknown table " + j.t1Alias);
         if (this.p.getTableId(j.t2Alias) == null)
@@ -313,7 +329,7 @@ public class JoinOptimizer {
         boolean leftPkey, rightPkey;
 
         if (news.isEmpty()) { // base case -- both are base relations
-            prevBest = new Vector<LogicalJoinNode>();
+            prevBest = new Vector<>();
             t1cost = stats.get(table1Name).estimateScanCost();
             t1card = stats.get(table1Name).estimateTableCardinality(
                 filterSelectivities.get(j.t1Alias));
@@ -322,8 +338,7 @@ public class JoinOptimizer {
             t2cost = table2Alias == null ? 0 : stats.get(table2Name)
                 .estimateScanCost();
             t2card = table2Alias == null ? 0 : stats.get(table2Name)
-                .estimateTableCardinality(
-                    filterSelectivities.get(j.t2Alias));
+                .estimateTableCardinality(filterSelectivities.get(j.t2Alias));
             rightPkey = table2Alias == null ? false : isPkey(table2Alias,
                 j.f2PureName);
         } else {
@@ -342,8 +357,7 @@ public class JoinOptimizer {
             // estimate cost of right subtree
             if (doesJoin(prevBest, table1Alias)) { // j.t1 is in prevBest
                 t1cost = prevBestCost; // left side just has cost of whatever
-                // left
-                // subtree is
+                // left subtree is
                 t1card = bestCard;
                 leftPkey = hasPkey(prevBest);
 
@@ -414,6 +428,7 @@ public class JoinOptimizer {
     }
 
     /**
+     * 因为只有一个主键
      * Return true if field is a primary key of the specified table, false
      * otherwise
      *

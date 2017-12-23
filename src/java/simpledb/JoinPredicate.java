@@ -3,8 +3,8 @@ package simpledb;
 import java.io.Serializable;
 
 /**
- * JoinPredicate compares fields of two tuples using a predicate. JoinPredicate
- * is most likely used by the Join operator.
+ * JoinPredicate compares fields of two tuples using a predicate.
+ * JoinPredicate is most likely used by the Join operator.
  */
 public class JoinPredicate implements Serializable {
 

@@ -69,7 +69,7 @@ public class LogicalJoinNode {
     }
     
     @Override public String toString() {
-        return t1Alias + ":" + t2Alias ;//+ ";" + f1 + " " + p + " " + f2;
+        return f1QuantifiedName + p.toString() + f2QuantifiedName;//+ ";" + f1 + " " + p + " " + f2;
     }
     
     @Override public int hashCode() {

@@ -1,10 +1,11 @@
 package simpledb;
 
-/** A LogicalFilterNode represents the parameters of a filter in the WHERE clause of a query. 
-    <p>
-    Filter is of the form t.f p c
-    <p>
-    Where t is a table, f is a field in t, p is a predicate, and c is a constant
+/**
+ * A LogicalFilterNode represents the parameters of a filter in the WHERE clause of a query.
+ * <p>
+ *     Filter is of the form t.f p c
+ * <p>
+ * Where t is a table, f is a field in t, p is a predicate, and c is a constant
 */
 public class LogicalFilterNode {
     /** The alias of a table (or the name if no alias) over which the filter ranges */

@@ -40,7 +40,7 @@ public class IntHistogram {
 		} else if (value > max) {
 			return length - 1;
 		} else {
-			return (value - min) * (length - 1) / (max - min);
+			return (int) Math.floor(1.0 * (value - min) * (length - 1) / (max - min));
 		}
 	}
 
